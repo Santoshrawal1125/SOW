@@ -10,3 +10,20 @@ export async function fetchTranslations(lang = 'en') {
   }
   return res.json(); 
 }
+
+
+
+
+export function getAccessToken() {
+  return localStorage.getItem("accessToken");
+}
+
+export async function authFetch(input, init = {}) {
+  const token = getAccessToken();
+  const headers = new Headers(init.headers || {});
+  headers.set("Content-Type", headers.get("Content-Type") || "application/json");
+  if (token) headers.set("Authorization", `Bearer ${token}`);
+
+  const res = await fetch(input, { ...init, headers });
+  return res;
+}

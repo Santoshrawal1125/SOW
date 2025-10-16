@@ -248,19 +248,35 @@ html,
     overflow: hidden !important;
   }
 
-  /* mobile menu: full width under the navbar and roomy links */
+@media (max-width: 768px) {
   .mobile-menu {
-    left: 0 !important;
-    right: 0 !important;
-    top: 70px !important;
-    border-radius: 0 0 8px 8px !important;
+    position: absolute !important;
+    left: 12px !important;
+    right: auto !important;
+    max-width: 280px !important;
+    width: calc(100% - 24px) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 255, 255, 0.97) !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
     padding: 10px 8px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 6px !important;
-    z-index: 55 !important;
+
+    /* animation */
+    opacity: 0;
+    transform: translateY(-10px);
+    animation: menuSlideIn 0.25s ease forwards;
   }
 
+  @keyframes menuSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
   .mobile-menu a {
     display: block;
     padding: 12px 16px;

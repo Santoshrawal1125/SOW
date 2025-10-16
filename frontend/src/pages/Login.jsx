@@ -1,12 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../index.css";
-import { fetchTranslations } from "../api"; // helper
+import { fetchTranslations } from "../api"; 
 
 export default function Login() {
+  const navigate = useNavigate();
+
   const [lang, setLang] = useState("en");
   const [t, setT] = useState({});
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showMenu, setShowMenu] = useState(false); // 👈 for hamburger
+  const [showMenu, setShowMenu] = useState(false); // for hamburger
+
+  // auth form state
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   // Fetch translations
   useEffect(() => {
@@ -24,6 +33,58 @@ export default function Login() {
   }, [lang]);
 
   const tr = (key, fallback) => t[key] || fallback;
+
+  // handle login submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+
+    try {
+      const res = await fetch("/api/auth/login/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: email, 
+          password: password,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+  
+        const message =
+          data.detail ||
+          data.non_field_errors?.[0] ||
+          data.error ||
+          "Invalid credentials";
+        setError(message);
+        setLoading(false);
+        return;
+      }
+
+      // expected response: { access: "...", refresh: "..." }
+      if (data.access && data.refresh) {
+        localStorage.setItem("accessToken", data.access);
+        localStorage.setItem("refreshToken", data.refresh);
+
+        localStorage.setItem("tokenObtainedAt", String(Date.now()));
+
+        // navigate to pricelist
+        navigate("/pricelist", { replace: true });
+      } else {
+        setError("Unexpected response from server.");
+        setLoading(false);
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("Network error. Please try again.");
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="page login">
@@ -65,7 +126,7 @@ export default function Login() {
             border: "none",
             cursor: "pointer",
             fontSize: "28px",
-            display: "none", // hidden by default
+            display: "none", // hidden by default,  CSS shows it on mobile
           }}
         >
           ☰
@@ -207,19 +268,33 @@ export default function Login() {
       {/* Login card */}
       <div className="card">
         <h1 className="title">{tr("login.title", "Log in")}</h1>
-        <form>
+
+        <form onSubmit={handleSubmit}>
           <label>{tr("login.email_label", "Enter your email address")}</label>
           <input
             placeholder={tr("login.email_placeholder", "Email address")}
             type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
+
           <label>{tr("login.password_label", "Enter your password")}</label>
           <input
             placeholder={tr("login.password_placeholder", "Password")}
             type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
           />
-          <button type="submit">{tr("login.button", "Log in")}</button>
+
+          {error && <div style={{ color: "crimson", margin: "8px 0" }}>{error}</div>}
+
+          <button type="submit" disabled={loading}>
+            {loading ? "Signing in…" : tr("login.button", "Log in")}
+          </button>
         </form>
+
         <div className="links">
           <a href="#">{tr("login.register", "Register")}</a>
           <a href="#">{tr("login.forgot", "Forgotten password?")}</a>
