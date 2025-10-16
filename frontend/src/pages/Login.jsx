@@ -11,7 +11,6 @@ export default function Login() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showMenu, setShowMenu] = useState(false); // for hamburger
 
-  // auth form state
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -66,7 +65,6 @@ export default function Login() {
         return;
       }
 
-      // expected response: { access: "...", refresh: "..." }
       if (data.access && data.refresh) {
         localStorage.setItem("accessToken", data.access);
         localStorage.setItem("refreshToken", data.refresh);
