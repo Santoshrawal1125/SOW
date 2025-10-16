@@ -6,13 +6,7 @@ import Pricelist from './pages/Pricelist'
 
 const PrivateRoute = ({ element }) => {
   const accessToken = localStorage.getItem('accessToken')
-
-  // If no token, redirect to login
-  if (!accessToken) {
-    return <Navigate to="/" replace />
-  }
-
-  return element
+  return accessToken ? element : <Navigate to="/" replace />
 }
 
 export default function App() {

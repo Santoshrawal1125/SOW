@@ -1,0 +1,64 @@
+/* Page wrapper and global sizing */
+:root {
+  --header-h: 64px;
+  --content-max: 1200px;
+  --bg: #f3f4f6;
+}
+html, body, #root {
+  height: 100%;
+}
+.pricelist-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* container beneath header */
+.content-area {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  align-items: stretch;
+}
+
+/* main area scrolls, center inner content with max-width to match screenshots */
+.pricelist-main {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: auto;
+  min-height: 0;
+  background:#ffffff
+}
+
+.main-inner {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* overlay for mobile sidebar */
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.36);
+  z-index: 40;
+  transition: opacity 160ms ease;
+  opacity: 0;
+  pointer-events: none;
+}
+.mobile-overlay.visible {
+  display: block;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* small tweak so the header content lines up with main-inner */
+@media (min-width: 1200px) {
+  .app-header .header-inner,
+  .main-inner { max-width: var(--content-max); margin-left: auto; margin-right: auto; }
+}

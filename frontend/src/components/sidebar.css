@@ -1,0 +1,153 @@
+.sidebar-overlay {
+  display: none;
+}
+
+/* Sidebar */
+.app-sidebar {
+  width: 208px;
+  border-right: 1px solid #e5e7eb;
+  background: #ffffff;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  transition: transform 0.3s ease;
+}
+
+
+.sidebar-top {
+  padding: 12px 16px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.sidebar-title {
+  margin: 0;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+
+.sidebar-nav {
+  padding: 8px 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu-item {
+  margin: 0;
+}
+
+.menu-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  text-decoration: none;
+  color: #374151;
+  font-size: 14px;
+  transition: background 0.15s ease;
+  border-left: 3px solid transparent;
+  cursor: pointer;
+}
+
+.menu-link:hover {
+  background: #f9fafb;
+}
+
+.menu-link:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: -2px;
+}
+
+
+.menu-link.active {
+  border-left-color: #f59e0b;
+  background: #fffbeb;
+  font-weight: 500;
+}
+
+
+.menu-icon {
+  width: 18px;
+  height: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.menu-icon svg {
+  width: 18px;
+  height: 18px;
+  display: block;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+.icon-cyan { color: #06b6d4; }
+.icon-yellow { color: #f59e0b; }
+.icon-pink { color: #ec4899; }
+.icon-yellow-2 { color: #fbbf24; }
+
+/* Menu label */
+.menu-label {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* RESPONSIVE */
+
+/* iPad and below (1024px) - includes all tablets */
+@media (max-width: 1024px) {
+  .sidebar-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    animation: fadeIn 0.3s ease forwards;
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  .app-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 999;
+    transform: translateX(-100%);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .app-sidebar.open {
+    transform: translateX(0);
+  }
+}
+
+/* Mobile - adjust width */
+@media (max-width: 480px) {
+  .app-sidebar {
+    width: 260px;
+    max-width: 85vw;
+  }
+}
