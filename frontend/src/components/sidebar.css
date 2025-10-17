@@ -113,7 +113,7 @@
 
 /* RESPONSIVE */
 
-/* iPad and below (1024px) - includes all tablets */
+
 @media (max-width: 1024px) {
   .sidebar-overlay {
     display: block;
@@ -144,7 +144,7 @@
   }
 }
 
-/* Mobile - adjust width */
+
 @media (max-width: 480px) {
   .app-sidebar {
     width: 260px;

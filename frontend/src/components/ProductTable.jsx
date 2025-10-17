@@ -27,30 +27,31 @@ export function ProductTable() {
       <table className="product-table">
         <thead>
           <tr className="table-head-row">
-            <th className="cell cell-empty" scope="col"></th>
-            <th className="cell">Article No. <span className="icon-blue"><IconArrowDown /></span></th>
-            <th className="cell">Product/Service <span className="icon-blue"><IconArrowDown /></span></th>
-            <th className="cell">In Price</th>
-            <th className="cell">Price</th>
-            <th className="cell">Unit</th>
-            <th className="cell">In Stock</th>
-            <th className="cell">Description</th>
-            <th className="cell cell-empty" scope="col"></th>
+            <th className="cell cell-empty col-action" scope="col" aria-hidden></th>
+            <th className="cell col-article" scope="col">Article No. <span className="icon-blue"><IconArrowDown /></span></th>
+            <th className="cell col-product" scope="col">Product/Service <span className="icon-blue"><IconArrowDown /></span></th>
+            <th className="cell col-inprice" scope="col">In Price</th>
+            <th className="cell col-price" scope="col">Price</th>
+            <th className="cell col-unit" scope="col">Unit</th>
+            <th className="cell col-instock" scope="col">In Stock</th>
+            <th className="cell col-desc" scope="col">Description</th>
+            <th className="cell cell-empty col-action" scope="col" aria-hidden></th>
           </tr>
         </thead>
 
         <tbody>
           <tr className="table-row">
-            <td className="cell cell-icon" data-label=""><span className="icon-blue"><IconArrowRight /></span></td>
-            <td className="cell" data-label="Article No.">1234567890</td>
-            <td className="cell" data-label="Product/Service">This is a test product with fifty characters this!</td>
-            <td className="cell" data-label="In Price">900500</td>
-            <td className="cell" data-label="Price">1500800</td>
-            <td className="cell" data-label="Unit">kilometers/hour</td>
-            <td className="cell" data-label="In Stock">2500600</td>
-            <td className="cell" data-label="Description">This is the description with fifty characters this</td>
-            <td className="cell cell-icon" data-label=""><span className="icon-muted"><IconMoreHorizontal /></span></td>
+            <td className="cell cell-icon col-action" data-label=""><span className="icon-blue"><IconArrowRight /></span></td>
+            <td className="cell col-article" data-label="Article No.">1234567890</td>
+            <td className="cell col-product" data-label="Product/Service">This is a test product with fifty characters this!</td>
+            <td className="cell col-inprice" data-label="In Price">900500</td>
+            <td className="cell col-price" data-label="Price">1500800</td>
+            <td className="cell col-unit" data-label="Unit">kilometers/hour</td>
+            <td className="cell col-instock" data-label="In Stock">2500600</td>
+            <td className="cell col-desc" data-label="Description">This is the description with fifty characters this</td>
+            <td className="cell cell-icon col-action" data-label=""><span className="icon-muted"><IconMoreHorizontal /></span></td>
           </tr>
+
         </tbody>
       </table>
     </div>

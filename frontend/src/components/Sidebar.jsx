@@ -89,17 +89,17 @@ const ICONS = {
 // ----------------------------------------------------------------------
 export function Sidebar({ isOpen, onClose }) {
   const menuItems = [
-    { icon: 'fileText', label: 'Invoices', color: 'cyan', href: '/invoices' },
-    { icon: 'users', label: 'Customers', color: 'cyan', href: '/customers' },
-    { icon: 'chart', label: 'My Business', color: 'cyan', href: '/business' },
-    { icon: 'file', label: 'Invoice Journal', color: 'cyan', href: '/journal' },
-    { icon: 'list', label: 'Price List', color: 'yellow', active: true, href: '/price-list' },
-    { icon: 'archive', label: 'Multiple Invoicing', color: 'cyan', href: '/multiple' },
-    { icon: 'alert', label: 'Unpaid Invoices', color: 'pink', href: '/unpaid' },
-    { icon: 'tag', label: 'Offer', color: 'yellow-2', href: '/offers' },
-    { icon: 'package', label: 'Inventory Control', color: 'cyan', href: '/inventory' },
-    { icon: 'user', label: 'Member Invoicing', color: 'cyan', href: '/members' },
-    { icon: 'importExport', label: 'Import/Export', color: 'cyan', href: '/import-export' },
+    { icon: 'fileText', label: 'Invoices', color: 'cyan', href: '/pricelist' },
+    { icon: 'users', label: 'Customers', color: 'cyan', href: '/pricelist' },
+    { icon: 'chart', label: 'My Business', color: 'cyan', href: '/pricelist' },
+    { icon: 'file', label: 'Invoice Journal', color: 'cyan', href: '/pricelist' },
+    { icon: 'list', label: 'Price List', color: 'yellow', active: true, href: '/pricelist' },
+    { icon: 'archive', label: 'Multiple Invoicing', color: 'cyan', href: '/pricelist' },
+    { icon: 'alert', label: 'Unpaid Invoices', color: 'pink', href: '/pricelist' },
+    { icon: 'tag', label: 'Offer', color: 'yellow-2', href: '/pricelist' },
+    { icon: 'package', label: 'Inventory Control', color: 'cyan', href: '/pricelist' },
+    { icon: 'user', label: 'Member Invoicing', color: 'cyan', href: '/pricelist' },
+    { icon: 'importExport', label: 'Import/Export', color: 'cyan', href: '/pricelist' },
     { icon: 'logout', label: 'Log out', color: 'cyan', href: '/logout' }
   ];
 

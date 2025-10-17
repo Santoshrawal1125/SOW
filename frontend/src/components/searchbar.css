@@ -1,10 +1,8 @@
-
 .searchbar {
   margin-bottom: 24px;
   box-sizing: border-box;
   width: 100%;
 }
-
 
 .visually-hidden {
   position: absolute !important;
@@ -17,14 +15,13 @@
   margin: -1px;
 }
 
-
 .search-row {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 12px;
+  flex-wrap: nowrap;
 }
-
 
 .search-field {
   position: relative;
@@ -35,8 +32,8 @@
 
 .search-input {
   width: 100%;
-  padding: 10px 38px 10px 12px; 
-  border: 1px solid #d1d5db; 
+  padding: 10px 38px 10px 12px;
+  border: 1px solid #d1d5db;
   border-radius: 6px;
   font-size: 14px;
   box-sizing: border-box;
@@ -58,7 +55,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #9ca3af; 
+  color: #9ca3af;
   pointer-events: none;
 }
 
@@ -70,14 +67,13 @@
   fill: none;
 }
 
-
+/* actions area */
 .actions-row {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
 }
-
 
 .actions {
   margin-left: auto;
@@ -97,10 +93,19 @@
   color: #374151;
   cursor: pointer;
   font-size: 14px;
+  transition: background .12s, box-shadow .12s;
+  justify-content: center;
+  white-space: nowrap;
 }
 
 .action-btn:hover {
   background: #f8fafc;
+}
+
+.action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .action-icon svg {
@@ -109,12 +114,10 @@
   stroke: currentColor;
 }
 
-
 .action-label {
   color: #374151;
   font-size: 14px;
 }
-
 
 .action-toggle {
   display: inline-flex;
@@ -154,7 +157,6 @@
   transform: translateX(20px);
 }
 
-/* small responsive tweak */
 @media (max-width: 640px) {
   .actions {
     margin-left: 8px;
@@ -163,4 +165,76 @@
     max-width: 100%;
   }
   .action-btn { padding: 6px 8px; font-size: 13px; }
+}
+
+@media (max-width: 480px) {
+
+  .search-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+
+
+  .search-row.actions-row {
+    align-items: stretch;
+  }
+
+
+  .search-field {
+    width: 100%;
+    margin-right: 0;
+    max-width: 100%;
+  }
+
+
+  .actions {
+    margin-left: 0;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
+    width: 100%;
+    padding-top: 4px;
+  }
+
+
+  .actions .action-label,
+  .action-toggle .action-label {
+    display: none;
+  }
+
+
+  .action-btn {
+    padding: 8px;
+    min-width: 44px;      
+    height: 44px;
+    border-radius: 8px;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .action-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+
+  .action-toggle {
+    margin-left: 4px;
+  }
+  .toggle {
+    width: 40px;
+    height: 24px;
+    padding: 3px;
+  }
+  .toggle-knob {
+    width: 18px;
+    height: 18px;
+  }
+
+
+  .search-row, .actions {
+    gap: 8px;
+  }
 }

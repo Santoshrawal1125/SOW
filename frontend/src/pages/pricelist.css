@@ -1,7 +1,7 @@
 /* Page wrapper and global sizing */
 :root {
   --header-h: 64px;
-  --content-max: 1200px;
+  --content-max: 1300px;
   --bg: #f3f4f6;
 }
 html, body, #root {
