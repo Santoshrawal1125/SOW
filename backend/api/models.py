@@ -26,3 +26,6 @@ class Product(models.Model):
 
     def __str__(self):
         return f"{self.article_no} - {self.product_service}"
+    
+    class Meta:
+        ordering = ['created_at', 'id']
