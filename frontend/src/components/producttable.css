@@ -29,27 +29,40 @@
   font-size: 14px;
   color: #111827;
   box-sizing: border-box;
-  white-space: nowrap;         /* single-line */
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .cell-empty { width: 36px; padding: 12px; }
-.cell-icon { width: 48px; text-align: center; color: #0ea5a4; }
+.cell-icon { 
+  width: 48px; 
+  text-align: center; 
+  color: #0ea5a4; 
+}
 
-/* icons */
-.icon { display: inline-flex; align-items: center; justify-content: center; }
-.icon-small { width: 14px; height: 14px; }
-.icon-medium { width: 18px; height: 18px; }
-.icon-blue svg { stroke: #3b82f6; color: #3b82f6; }
-.icon-muted { color: #6b7280; }
+.product-table .icon { 
+  position: static !important;
+  display: inline-flex !important; 
+  align-items: center; 
+  justify-content: center;
+  transform: none !important;
+  right: auto !important;
+  top: auto !important;
+  pointer-events: auto !important;
+}
+.product-table .icon-small { width: 14px; height: 14px; }
+.product-table .icon-medium { width: 18px; height: 18px; }
+.product-table .icon-blue svg { stroke: #3b82f6; color: #3b82f6; }
+.product-table .icon-muted { color: #6b7280; }
 
 .product-table td.cell {
   border: 2px solid rgba(60, 132, 255, 1);
   border-radius: 9999px;
   background-color: #ffffff;
   padding: 10px 14px;
-  white-space: nowrap; /* keep single-line */
+  white-space: nowrap;
+  text-align: center;
 }
 
 .product-table td.cell-icon {
@@ -62,6 +75,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
 }
 
 .table-row {
@@ -76,7 +90,6 @@
   outline: 2px solid #60a5fa;
   outline-offset: 2px;
 }
-
 
 .product-table td.col-action,
 .product-table th.col-action { width: 28px; }   
@@ -141,9 +154,7 @@
 @media (max-width: 720px) and (orientation: portrait),
        (max-width: 720px) and (orientation: landscape) {
 
-
   .product-table thead { display: table-header-group; }
-
 
   .product-table th.col-article, .product-table td.col-article,
   .product-table th.col-inprice, .product-table td.col-inprice,
@@ -161,7 +172,6 @@
     visibility: visible !important;
   }
 
-
   .product-table {
     table-layout: fixed !important;
     width: 100% !important;
@@ -176,7 +186,6 @@
     text-align: right;
   }
 
-
   .product-table th, .product-table td {
     white-space: nowrap;
     overflow: hidden;
@@ -184,18 +193,14 @@
     vertical-align: middle;
     padding: 8px 10px;
   }
-
 
   .product-table tbody tr { display: table-row; }
   .product-table tbody td { display: table-cell; }
 
-
   .cell { padding: 8px 10px; font-size: 13px; }
 }
 
-
 @media (orientation: landscape) and (min-aspect-ratio: 4/3) and (min-width: 721px) and (max-width: 1366px) {
-  /* hide everything except product + price */
   .product-table th.col-article, .product-table td.col-article,
   .product-table th.col-inprice, .product-table td.col-inprice,
   .product-table th.col-unit, .product-table td.col-unit,
@@ -206,13 +211,11 @@
     visibility: hidden !important;
   }
 
-
   .product-table th.col-product, .product-table td.col-product,
   .product-table th.col-price,   .product-table td.col-price {
     display: table-cell !important;
     visibility: visible !important;
   }
-
 
   .product-table {
     table-layout: fixed !important;
@@ -238,5 +241,3 @@
 
   .cell { padding: 8px 10px; font-size: 13px; }
 }
-
-
