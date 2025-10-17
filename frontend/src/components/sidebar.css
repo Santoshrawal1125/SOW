@@ -151,3 +151,19 @@
     max-width: 85vw;
   }
 }
+
+
+:root {
+  --header-height: 70px; 
+}
+
+@media (min-width: 1025px) {
+  .app-sidebar {
+    position: sticky;       
+    top: var(--header-height);
+    align-self: flex-start; 
+    height: calc(100vh - var(--header-height)); 
+    overflow-y: auto;       
+    z-index: 10;            
+  }
+}
