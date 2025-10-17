@@ -72,7 +72,6 @@
   width: 40px;
   height: 40px;
   padding: 0;
-  background-color: #eef6ff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -243,8 +242,66 @@
 }
 
 .product-table td.cell {
-  padding: 2px 6px;
+  padding: 4px 10px;
   line-height: 1;        
   height: auto;
   white-space: nowrap;
 }
+
+
+/* clickable rows */
+.table-row {
+  cursor: pointer;
+  transition: background-color 120ms ease;
+}
+
+.table-row:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+}
+
+.table-row[data-active="true"] {
+  background: #eef6ff; 
+}
+
+.product-table .icon-placeholder {
+  display: inline-block;
+  width: 18px;  
+  height: 18px;
+  border-radius: 2px;
+}
+
+.product-table td.cell-icon .icon {
+  transition: transform 120ms ease, opacity 120ms ease;
+}
+
+.product-table th.col-action,
+.product-table td.col-action,
+.product-table th.cell.cell-empty.col-action,
+.product-table td.cell.cell-empty.col-action,
+.product-table td.cell-icon.col-action {
+  border: none;
+  background-color: transparent; 
+  box-shadow: none;
+}
+
+.product-table th.col-action,
+.product-table td.col-action,
+.product-table td.cell-icon.col-action {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.inline-edit-cell { display: inline-flex; flex-direction: column; min-width: 60px; }
+.inline-display { padding: 2px 6px; cursor: text; }
+.inline-input {
+  box-sizing: border-box;
+  padding: 4px 6px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 14px;
+  min-width: 50px;
+}
+.inline-input:disabled { opacity: 0.7; }
+.inline-saving { margin-left: 6px; font-size: 12px; color: #6b7280; }
+.inline-error { color: #b91c1c; font-size: 12px; margin-top: 4px; }
