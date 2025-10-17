@@ -1,10 +1,8 @@
-
 .product-table-wrapper {
   width: 100%;
   box-sizing: border-box;
-  overflow-x: hidden; /* no horizontal scroll */
+  overflow-x: hidden;
 }
-
 
 .product-table {
   width: 100%;
@@ -13,9 +11,8 @@
   background: #ffffff;
   box-sizing: border-box;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  table-layout: fixed;
+  table-layout: fixed; 
 }
-
 
 .table-head-row {
   text-align: left;
@@ -23,7 +20,6 @@
   border-bottom: 1px solid #e5e7eb;
   background: #ffffff;
 }
-
 
 .cell,
 .product-table th,
@@ -34,10 +30,9 @@
   color: #111827;
   box-sizing: border-box;
   white-space: nowrap;         /* single-line */
-  overflow: hidden;            
-  text-overflow: ellipsis;     
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
 
 .cell-empty { width: 36px; padding: 12px; }
 .cell-icon { width: 48px; text-align: center; color: #0ea5a4; }
@@ -49,7 +44,6 @@
 .icon-blue svg { stroke: #3b82f6; color: #3b82f6; }
 .icon-muted { color: #6b7280; }
 
-/* rounded "oval" cell appearance */
 .product-table td.cell {
   border: 2px solid rgba(60, 132, 255, 1);
   border-radius: 9999px;
@@ -58,7 +52,6 @@
   white-space: nowrap; /* keep single-line */
 }
 
-/* circular icon cell */
 .product-table td.cell-icon {
   border: 2px solid rgba(179,186,198,1);
   border-radius: 50%;
@@ -71,14 +64,12 @@
   justify-content: center;
 }
 
-
 .table-row {
   border-bottom: 1px solid #f3f4f6;
   transition: background-color 120ms ease;
   background: transparent;
 }
 .table-row:hover { background: #f9fafb; }
-
 
 .product-table td:focus,
 .product-table th:focus {
@@ -88,7 +79,7 @@
 
 
 .product-table td.col-action,
-.product-table th.col-action { width: 28px; }  
+.product-table th.col-action { width: 28px; }   
 .product-table td.col-article,
 .product-table th.col-article { width: 10%; }
 .product-table td.col-product,
@@ -98,15 +89,16 @@
 .product-table td.col-inprice,
 .product-table th.col-inprice { width: 7%; }
 .product-table td.col-unit,
-.product-table th.col-unit {width:11%}
+.product-table th.col-unit { width: 11%; }
 .product-table td.col-instock,
 .product-table th.col-instock { width: 8%; }
 .product-table td.col-desc,
 .product-table th.col-desc { width: 27%; }
 
 /* 
-   Tablet / iPad (721px — 1081px)
+   TABLET (721px — 1081px)
 */
+@media (min-width: 721px) and (max-width: 1081px) {
   .product-table th.col-desc,
   .product-table td.col-desc,
   .product-table th.col-inprice,
@@ -117,24 +109,21 @@
     visibility: hidden !important;
   }
 
-
   .product-table {
-    table-layout: auto;
+    table-layout: auto; 
     width: 100%;
   }
-
 
   .product-table td.col-article,
   .product-table th.col-article { width: 12%; }   
   .product-table td.col-product,
-  .product-table th.col-product { width: 50%; }   
+  .product-table th.col-product { width: 50%; }  
   .product-table td.col-price,
-  .product-table th.col-price   { width: 14%; }   
+  .product-table th.col-price   { width: 14%; }  
   .product-table td.col-unit,
   .product-table th.col-unit    { width: 8%; }
   .product-table td.col-instock,
   .product-table th.col-instock{ width: 16%; }
-
 
   .product-table th,
   .product-table td {
@@ -143,17 +132,70 @@
     text-overflow: ellipsis;
   }
 
-
   .cell { padding: 10px 12px; font-size: 14px; }
 }
 
+/*
+   MOBILE — phones (<= 720px)
+*/
+@media (max-width: 720px) and (orientation: portrait),
+       (max-width: 720px) and (orientation: landscape) {
 
-
-@media (max-width: 720px) {
 
   .product-table thead { display: table-header-group; }
 
 
+  .product-table th.col-article, .product-table td.col-article,
+  .product-table th.col-inprice, .product-table td.col-inprice,
+  .product-table th.col-unit, .product-table td.col-unit,
+  .product-table th.col-instock, .product-table td.col-instock,
+  .product-table th.col-desc, .product-table td.col-desc,
+  .product-table th.col-action, .product-table td.col-action {
+    display: none !important;
+    visibility: hidden !important;
+  }
+
+  .product-table th.col-product, .product-table td.col-product,
+  .product-table th.col-price,   .product-table td.col-price {
+    display: table-cell !important;
+    visibility: visible !important;
+  }
+
+
+  .product-table {
+    table-layout: fixed !important;
+    width: 100% !important;
+  }
+
+  .product-table th.col-product, .product-table td.col-product {
+    width: 70% !important;
+    text-align: left;
+  }
+  .product-table th.col-price, .product-table td.col-price {
+    width: 30% !important;
+    text-align: right;
+  }
+
+
+  .product-table th, .product-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    padding: 8px 10px;
+  }
+
+
+  .product-table tbody tr { display: table-row; }
+  .product-table tbody td { display: table-cell; }
+
+
+  .cell { padding: 8px 10px; font-size: 13px; }
+}
+
+
+@media (orientation: landscape) and (min-aspect-ratio: 4/3) and (min-width: 721px) and (max-width: 1366px) {
+  /* hide everything except product + price */
   .product-table th.col-article, .product-table td.col-article,
   .product-table th.col-inprice, .product-table td.col-inprice,
   .product-table th.col-unit, .product-table td.col-unit,
@@ -173,17 +215,16 @@
 
 
   .product-table {
-    table-layout: fixed;
-    width: 100%;
+    table-layout: fixed !important;
+    width: 100% !important;
   }
 
-
-  .product-table th.col-product, .product-table td.col-product { 
-    width: 70%; 
+  .product-table th.col-product, .product-table td.col-product {
+    width: 70% !important;
     text-align: left;
   }
-  .product-table th.col-price, .product-table td.col-price { 
-    width: 30%; 
+  .product-table th.col-price, .product-table td.col-price {
+    width: 30% !important;
     text-align: right;
   }
 
@@ -195,19 +236,7 @@
     padding: 8px 10px;
   }
 
-  .product-table tbody tr { display: table-row; }
-  .product-table tbody td { display: table-cell; }
-
   .cell { padding: 8px 10px; font-size: 13px; }
 }
 
-@media (max-width: 1000px) and (orientation: landscape) {
-  .product-table th.col-article, .product-table td.col-article,
-  .product-table th.col-inprice, .product-table td.col-inprice,
-  .product-table th.col-unit, .product-table td.col-unit,
-  .product-table th.col-instock, .product-table td.col-instock,
-  .product-table th.col-desc, .product-table td.col-desc,
-  .product-table th.col-action, .product-table td.col-action {
-    display: none !important;
-  }
-}
+
