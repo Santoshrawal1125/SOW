@@ -94,19 +94,19 @@
 .product-table td.col-action,
 .product-table th.col-action { width: 28px; }   
 .product-table td.col-article,
-.product-table th.col-article { width: 10%; }
+.product-table th.col-article { width: 10.3%; }
 .product-table td.col-product,
 .product-table th.col-product { width: 26.9%; }
 .product-table td.col-price,
-.product-table th.col-price { width: 8%; }
+.product-table th.col-price { width: 8.5%; }
 .product-table td.col-inprice,
-.product-table th.col-inprice { width: 7%; }
+.product-table th.col-inprice { width: 8%; }
 .product-table td.col-unit,
-.product-table th.col-unit { width: 11%; }
+.product-table th.col-unit { width: 11.2%; }
 .product-table td.col-instock,
-.product-table th.col-instock { width: 8%; }
+.product-table th.col-instock { width: 7.2%; }
 .product-table td.col-desc,
-.product-table th.col-desc { width: 27%; }
+.product-table th.col-desc { width: 20%; }
 
 /* 
    TABLET (721px — 1081px)

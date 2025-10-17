@@ -6,6 +6,9 @@ from .serializers import ProductSerializer
 from django.views import View
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from rest_framework import viewsets
+from rest_framework.views import APIView
+from rest_framework import status
 
 class TranslationsView(View):
 
@@ -20,9 +23,22 @@ class TranslationsView(View):
         return JsonResponse(data, safe=True)
 
 
-class ProductListView(generics.ListAPIView):
-    permission_classes = [permissions.IsAuthenticated]
-    serializer_class = ProductSerializer
-    queryset = Product.objects.all()
+
+
+class ProductListView(APIView):
+    def get(self, request):
+        products = Product.objects.filter(active=True).order_by('-created_at')
+        serializer = ProductSerializer(products, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class ProductDetailView(APIView):
+    def get(self, request, pk):
+        try:
+            product = Product.objects.get(pk=pk, active=True)
+        except Product.DoesNotExist:
+            return Response({'error': 'Product not found'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = ProductSerializer(product)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 

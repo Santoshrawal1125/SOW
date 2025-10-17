@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './producttable.css';
 
 const IconArrowDown = () => (
@@ -6,7 +6,6 @@ const IconArrowDown = () => (
     <path d="M6 9l6 6 6-6" stroke="currentColor" strokeWidth="1.6" fill="none" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
-
 
 const IconArrowRightGreen = () => (
   <svg viewBox="0 0 24 24" className="icon icon-medium" fill="none" stroke="#10b981" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -23,6 +22,36 @@ const IconEdit = () => (
 );
 
 export function ProductTable() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch('/api/products/')
+      .then(async (res) => {
+        if (!res.ok) {
+          const txt = await res.text();
+          throw new Error(`API error ${res.status}: ${txt}`);
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data)) {
+          setProducts(data);
+        } else if (data && Array.isArray(data.results)) {
+          setProducts(data.results);
+        } else {
+          const found = Array.isArray(data.items) ? data.items : [];
+          setProducts(found);
+        }
+      })
+      .catch((err) => {
+        console.error('Failed to load products', err);
+        setError(err.message || 'Failed to load');
+      })
+      .finally(() => setLoading(false));
+  }, []);
+
   return (
     <div className="product-table-wrapper" role="region" aria-label="Product list table">
       <table className="product-table">
@@ -39,25 +68,33 @@ export function ProductTable() {
             <th className="cell cell-empty col-action" scope="col" aria-hidden></th>
           </tr>
         </thead>
-   
+
         <tbody>
-          <tr className="table-row">
-            <td className="cell cell-icon col-action" data-label="">
-              <IconArrowRightGreen />
-            </td>
-            <td className="cell col-article" data-label="Article No.">1234567890</td>
-            <td className="cell col-product" data-label="Product/Service">This is a test product with fifty characters this!</td>
-            <td className="cell col-inprice" data-label="In Price">900500</td>
-            <td className="cell col-price" data-label="Price">1500800</td>
-            <td className="cell col-unit" data-label="Unit">kilometers/hour</td>
-            <td className="cell col-instock" data-label="In Stock">2500600</td>
-            <td className="cell col-desc" data-label="Description">This is the description with fifty characters this</td>
-            <td className="cell cell-icon col-action" data-label="">
-              <span className="icon-muted">
-                <IconEdit />
-              </span>
-            </td>
-          </tr>
+          {loading ? (
+            <tr className="table-row"><td className="cell" colSpan={9}>Loading...</td></tr>
+          ) : error ? (
+            <tr className="table-row"><td className="cell" colSpan={9}>Error: {error}</td></tr>
+          ) : products.length === 0 ? (
+            <tr className="table-row"><td className="cell" colSpan={9}>No products found</td></tr>
+          ) : (
+            products.map((prod) => (
+              <tr key={prod.id ?? prod.article_no} className="table-row">
+                <td className="cell cell-icon col-action" data-label="">
+                  <IconArrowRightGreen />
+                </td>
+                <td className="cell col-article" data-label="Article No.">{prod.article_no || '—'}</td>
+                <td className="cell col-product" data-label="Product/Service">{prod.product_service}</td>
+                <td className="cell col-inprice" data-label="In Price">{prod.in_price}</td>
+                <td className="cell col-price" data-label="Price">{prod.price}</td>
+                <td className="cell col-unit" data-label="Unit">{prod.unit}</td>
+                <td className="cell col-instock" data-label="In Stock">{prod.in_stock}</td>
+                <td className="cell col-desc" data-label="Description">{prod.description}</td>
+                <td className="cell cell-icon col-action" data-label="">
+                  <span className="icon-muted"><IconEdit /></span>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>
