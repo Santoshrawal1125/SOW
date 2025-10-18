@@ -50,19 +50,19 @@ python -m venv venv
 \venv\Scripts\Activate (for windows)
 \venv\bin\activate (for mac)
 ```
-# 3)install requirements
+# 3) Install requirements
 pip install -r requirements.txt
 
-# 4)run Django migrations
+# 4) Run Django migrations
 ```
 python manage.py makemigrations
 python manage.py migrate
 ```
-# 5)create a superuser for admin
+# 5) Create a superuser for admin
 ```
 python manage.py createsuperuser
 ```
-# 6)run dev server
+# 6) Run dev server
 ```
 python manage.py runserver 0.0.0.0:8000
 ```
