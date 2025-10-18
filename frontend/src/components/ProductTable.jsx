@@ -24,7 +24,6 @@ const IconEdit = () => (
   </svg>
 );
 
-/* API helper */
 
 async function apiPatchProduct(productId, patchObj) {
   const res = await authFetch(`/api/products/${productId}/`, {

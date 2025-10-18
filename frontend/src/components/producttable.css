@@ -108,9 +108,10 @@
 .product-table th.col-desc { width: 20%; }
 
 /* 
-   TABLET (721px — 1081px)
+   TABLET
+ 
 */
-@media (min-width: 721px) and (max-width: 1081px) {
+@media (min-width: 721px) and (max-width: 1366px) {
   .product-table th.col-desc,
   .product-table td.col-desc,
   .product-table th.col-inprice,
@@ -122,7 +123,7 @@
   }
 
   .product-table {
-    table-layout: auto; 
+    table-layout: auto !important; 
     width: 100%;
   }
 
@@ -305,3 +306,38 @@
 .inline-input:disabled { opacity: 0.7; }
 .inline-saving { margin-left: 6px; font-size: 12px; color: #6b7280; }
 .inline-error { color: #b91c1c; font-size: 12px; margin-top: 4px; }
+
+
+@media (min-width: 760px) and (max-width: 920px) {
+  .product-table th.col-product,
+  .product-table td.col-product { width: 58% !important; }
+
+  .product-table th.col-article,
+  .product-table td.col-article { width: 9% !important; }
+  .product-table th.col-price,
+  .product-table td.col-price { width: 11% !important; }
+
+  .product-table th.col-unit,
+  .product-table td.col-unit { width: 8% !important; }
+  .product-table th.col-instock,
+  .product-table td.col-instock { width: 14% !important; }
+
+  .product-table th,
+  .product-table td,
+  .cell {
+    padding-left: 8px !important;
+    padding-right: 8px !important;
+    font-size: 14px;
+  }
+
+  .product-table {
+    table-layout: auto !important;
+    width: 100% !important;
+  }
+
+  .inline-display, .product-table td, .product-table th {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
