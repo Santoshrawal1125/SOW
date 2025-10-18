@@ -8,7 +8,7 @@ It includes a separated frontend and backend:
 - `/frontend` — Vite + React (vanilla JavaScript) + plain CSS  
 - `/backend` — Django (Python) + PostgreSQL
 
-This README documents the exact versions used, how to run locally, build for production, and basic deployment instructions for a Linux VM (Ubuntu). It also contains sample `.env` files, DB setup instructions, and CI hints.
+This README documents the exact versions used, how to run locally. It also contains sample `.env` files.
 
 ---
 
