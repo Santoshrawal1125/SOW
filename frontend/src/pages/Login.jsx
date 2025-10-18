@@ -135,7 +135,7 @@ export default function Login() {
           left: 0,
           right: 0,
           height: "70px",
-          padding: "0 40px",
+          padding: "10px 25px",
           zIndex: 3,
           background: "transparent",
         }}

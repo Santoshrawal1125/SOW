@@ -137,6 +137,7 @@ html,
   color: #ffffffff;
   font-weight: 600;
   transition: color 0.2s ease;
+  padding:20px;
 }
 
 .nav-links a:hover {
