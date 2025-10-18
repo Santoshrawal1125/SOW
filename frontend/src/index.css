@@ -171,7 +171,6 @@ html,
   text-decoration: underline;
 }
 
-/* Mobile responsive tweaks: place hamburger at left, keep language at right, clean dropdown & mobile menu */
 @media (max-width: 768px) {
   /* hide logo */
   .nav-logo {
@@ -181,7 +180,6 @@ html,
     height: 0 !important;
   }
 
-  /* show & pin hamburger to the left edge where the logo was */
   .hamburger {
     display: block !important;
     position: absolute !important;
@@ -197,17 +195,14 @@ html,
     line-height: 1 !important;
   }
 
-  /* tighten navbar padding for small screens */
   .navbar {
     padding: 0 12px;
   }
 
-  /* hide the inline anchor nav links (they go into the mobile menu) */
   .nav-links > a {
     display: none !important;
   }
 
-  /* keep the language container visible and push it to the far right */
   .nav-links {
     flex: 1;
     display: flex;
@@ -215,14 +210,12 @@ html,
     gap: 12px;
   }
 
-  /* the language control stays visible and is right aligned */
   .nav-links > div {
     display: inline-flex;
     margin-left: auto !important;
     position: relative;
   }
 
-  /* improve top button appearance (language button) */
   .nav-links > div > button {
     padding: 8px 12px !important;
     font-size: 15px !important;
@@ -235,7 +228,6 @@ html,
     gap: 8px !important;
   }
 
-  /* dropdown panel: keep it aligned to the language button and readable */
   .nav-links > div > div {
     right: 0 !important;
     left: auto !important;
@@ -260,7 +252,7 @@ html,
     box-shadow: 0 8px 20px rgba(0,0,0,0.12) !important;
     padding: 10px 8px !important;
 
-    /* animation */
+   
     opacity: 0;
     transform: translateY(-10px);
     animation: menuSlideIn 0.25s ease forwards;

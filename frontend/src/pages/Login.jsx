@@ -9,12 +9,36 @@ export default function Login() {
   const [lang, setLang] = useState("en");
   const [t, setT] = useState({});
   const [showDropdown, setShowDropdown] = useState(false);
-  const [showMenu, setShowMenu] = useState(false); // for hamburger
+  const [showMenu, setShowMenu] = useState(false); 
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+
+  const FLAGS = {
+    sv: "https://storage.123fakturere.no/public/flags/SE.png",
+    en: "https://storage.123fakturere.no/public/flags/GB.png",
+  };
+
+
+  const imgOnErrorReplaceWithEmoji = (e, emoji) => {
+    try {
+      const span = document.createElement("span");
+      span.textContent = emoji;
+      span.style.fontFamily =
+        'Apple Color Emoji, "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", sans-serif';
+      span.style.lineHeight = "1";
+      span.style.display = "inline-block";
+      span.style.width = "20px";
+      span.style.textAlign = "center";
+      e.currentTarget.replaceWith(span);
+    } catch (err) {
+      // silent fallback
+      e.currentTarget.style.display = "none";
+    }
+  };
 
   // Fetch translations
   useEffect(() => {
@@ -84,6 +108,17 @@ export default function Login() {
     }
   };
 
+  // inline style for flag images
+  const flagStyle = {
+    width: "20px",
+    height: "14px",
+    objectFit: "cover",
+    display: "inline-block",
+    verticalAlign: "middle",
+    borderRadius: "2px",
+    marginRight: "8px",
+  };
+
   return (
     <div className="page login">
       <div className="bg" />
@@ -124,7 +159,7 @@ export default function Login() {
             border: "none",
             cursor: "pointer",
             fontSize: "28px",
-            display: "none", // hidden by default,  CSS shows it on mobile
+            display: "none", 
           }}
         >
           ☰
@@ -166,11 +201,23 @@ export default function Login() {
             >
               {lang === "en" ? (
                 <>
-                  🇬🇧 <span>English</span>
+                  <img
+                    src={FLAGS.en}
+                    alt="English"
+                    style={flagStyle}
+                    onError={(e) => imgOnErrorReplaceWithEmoji(e, "🇬🇧")}
+                  />
+                  <span>English</span>
                 </>
               ) : (
                 <>
-                  🇸🇪 <span>Svenska</span>
+                  <img
+                    src={FLAGS.sv}
+                    alt="Svenska"
+                    style={flagStyle}
+                    onError={(e) => imgOnErrorReplaceWithEmoji(e, "🇸🇪")}
+                  />
+                  <span>Svenska</span>
                 </>
               )}
             </button>
@@ -208,7 +255,13 @@ export default function Login() {
                     setShowDropdown(false);
                   }}
                 >
-                  🇬🇧 English
+                  <img
+                    src={FLAGS.en}
+                    alt="English"
+                    style={flagStyle}
+                    onError={(e) => imgOnErrorReplaceWithEmoji(e, "🇬🇧")}
+                  />
+                  <span>English</span>
                 </button>
 
                 <button
@@ -229,7 +282,13 @@ export default function Login() {
                     setShowDropdown(false);
                   }}
                 >
-                  🇸🇪 Svenska
+                  <img
+                    src={FLAGS.sv}
+                    alt="Svenska"
+                    style={flagStyle}
+                    onError={(e) => imgOnErrorReplaceWithEmoji(e, "🇸🇪")}
+                  />
+                  <span>Svenska</span>
                 </button>
               </div>
             )}
