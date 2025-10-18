@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 import { fetchTranslations } from "../api";
+import { Link } from "react-router-dom";
 
 export default function TermsAndConditions() {
   const navigate = useNavigate();
@@ -53,14 +54,16 @@ export default function TermsAndConditions() {
         }}
       >
         {/* Left: Logo */}
-        <div className="nav-left" style={{ display: "flex", alignItems: "center" }}>
+      <div className="nav-left" style={{ display: "flex", alignItems: "center" }}>
+        <Link to="/" style={{ display: "flex", alignItems: "center" }}>
           <img
             src="https://storage.123fakturera.se/public/icons/diamond.png"
             alt="logo"
             className="nav-logo"
-            style={{ height: "40px" }}
+            style={{ height: "40px", cursor: "pointer" }}
           />
-        </div>
+        </Link>
+      </div>
 
         {/* Hamburger for mobile */}
         <button
