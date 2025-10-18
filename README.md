@@ -12,9 +12,9 @@ This README documents the exact versions used, how to run locally. It also conta
 
 ---
 
-Tech stack & versions (recorded from local dev environment)
+Tech stack & versions 
 -----------------------------------------------------------
-> These versions reflect the environment you supplied.
+
 
 ### Frontend
 - React: **19.2.0**
