@@ -283,4 +283,53 @@ html,
   }
 }
 
+ /* this is for inlineeditcell  css*/
 
+.inline-edit-cell {
+  display: block;        
+  width: 100%;
+  height: 100%;
+  min-width: 0;          
+  padding: 0;            
+  margin: 0;
+  background: transparent;
+  cursor: text;          
+  box-shadow: none;
+  outline: none;
+}
+
+.inline-display {
+  display: block;
+  width: 100%;
+  padding: 0;            
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.1;
+  cursor: text;
+}
+
+.inline-edit-wrapper { display: flex; align-items: center; width: 100%; }
+.inline-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  padding: 0;           
+  margin: 0;
+  box-shadow: none;
+  min-width: 0;
+}
+
+.inline-saving { margin-left: 6px; font-size: 12px; color: #6b7280; }
+.inline-error { color: #b91c1c; font-size: 12px; margin-top: 4px; }
+
+
+.product-table td > .inline-edit-cell.editing {
+
+}
+
+.table-row { cursor: pointer; }
+.product-table td .inline-edit-cell { cursor: text; }

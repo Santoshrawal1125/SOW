@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-
 export function InlineEditCell({
   value: initialValue,
   onSave,
@@ -68,7 +67,7 @@ export function InlineEditCell({
     const thisRequestId = ++requestIdRef.current;
 
     try {
-      const result = await onSave(value); 
+      const result = await onSave(value);
       if (!mounted.current || thisRequestId !== requestIdRef.current) return;
 
       const newVal = (result && result.updatedValue !== undefined) ? result.updatedValue : value;
@@ -77,7 +76,6 @@ export function InlineEditCell({
       setEditing(false);
     } catch (err) {
       setLocalError(err?.message || 'Save failed');
-
     } finally {
       if (mounted.current) setSaving(false);
     }
@@ -93,15 +91,36 @@ export function InlineEditCell({
     }
   };
 
+
+  const onContainerMouseDown = (e) => {
+    if (!editing) {
+      e.preventDefault(); 
+      startEdit(e);
+    }
+  };
+
+  const onContainerKeyDown = (e) => {
+    if (!editing && (e.key === 'Enter' || e.key === ' ')) {
+      e.preventDefault();
+      startEdit();
+    }
+  };
+
   return (
-    <div className={`inline-edit-cell ${className}`} onClick={(e) => { if (!editing) startEdit(e); }} >
+    <div
+      className={`inline-edit-cell ${editing ? 'editing' : ''} ${className}`}
+      onMouseDown={onContainerMouseDown}
+      onKeyDown={onContainerKeyDown}
+      tabIndex={0}
+      role="button"
+      aria-label="Edit value"
+      onClick={(e) => { if (!editing) startEdit(e); }}
+      style={{ outline: 'none' }}
+    >
       {!editing ? (
         <div
           className="inline-display"
-          role="button"
-          tabIndex={0}
           onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); startEdit(); } }}
-          aria-label="Edit value"
         >
           {renderValue ? renderValue(value) : value ?? '—'}
         </div>
