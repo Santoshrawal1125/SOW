@@ -360,19 +360,29 @@ export default function Login() {
         </div>
       </div>
 
-      <footer className="footer">
-        <div className="footer-links">
-          <a href="#">{tr("nav.home", "Home")}</a>
-          <a href="#">{tr("nav.order", "Order")}</a>
-          <a href="#">{tr("nav.contact", "Contact us")}</a>
-        </div>
-        <p>
-          {tr(
-            "footer.copyright",
-            "© Lättfaktura, CRO no. 638537, 2025. All rights reserved."
-          )}
-        </p>
-      </footer>
+<footer className="footer">
+  <div className="footer-top">
+    <span className="footer-brand">123 Fakturera</span>
+
+    <div className="footer-links">
+      <a href="#">{tr("nav.home", "Home")}</a>
+      <a href="#">{tr("nav.order", "Order")}</a>
+      <a href="#">{tr("nav.contact", "Contact us")}</a>
+    </div>
+  </div>
+
+  <div className="footer-divider"></div>
+
+  <p className="footer-copy">
+    {tr(
+      "footer.copyright",
+      "© Lättfaktura, CRO no. 638537, 2025. All rights reserved."
+    )}
+  </p>
+</footer>
+
+
+
     </div>
   );
 }
