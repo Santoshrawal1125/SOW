@@ -58,13 +58,24 @@
 .product-table .icon-muted { color: #6b7280; }
 
 .product-table td.cell {
-  border: 1px solid rgba(60, 132, 255, 1);
-  border-radius: 9999px;
-  background-color: #ffffff;
-  padding: 2px 6px;
+  border: 1px solid rgba(164, 190, 235, 0.6);
+  border-radius: 12px;
+  background: linear-gradient(145deg, #ffffff, #f3f7ff);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+  padding: 10px 14px;
   white-space: nowrap;
   text-align: center;
+  font-size: 14px;
+  color: #2c3e50;
+  transition: all 0.2s ease-in-out;
 }
+
+.product-table td.cell:hover {
+  background: #eef3ff;
+  border-color: rgba(180, 200, 235, 1);
+  transform: translateY(-1px);
+}
+
 
 .product-table td.cell-icon {
   border: 2px solid rgba(179,186,198,1);
