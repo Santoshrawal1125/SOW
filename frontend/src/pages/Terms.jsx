@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 import { fetchTranslations } from "../api";
@@ -11,7 +11,9 @@ export default function TermsAndConditions() {
   const [showDropdown, setShowDropdown] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
-  // Fetch translations
+  const [canClose, setCanClose] = useState(false);
+  const contentRef = useRef(null);
+
   useEffect(() => {
     let mounted = true;
     fetchTranslations(lang)
@@ -32,11 +34,39 @@ export default function TermsAndConditions() {
     navigate("/", { replace: true });
   };
 
+  const checkScrollEnd = () => {
+    const el = contentRef.current;
+    if (!el) return;
+    const { scrollTop, clientHeight, scrollHeight } = el;
+    const atBottom = scrollTop + clientHeight >= scrollHeight - 8;
+    setCanClose(atBottom);
+  };
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) {
+
+      const id = setTimeout(checkScrollEnd, 50);
+      return () => clearTimeout(id);
+    }
+
+    const handler = () => checkScrollEnd();
+    el.addEventListener("scroll", handler, { passive: true });
+    window.addEventListener("resize", handler);
+
+    const initialCheckId = setTimeout(checkScrollEnd, 50);
+
+    return () => {
+      el.removeEventListener("scroll", handler);
+      window.removeEventListener("resize", handler);
+      clearTimeout(initialCheckId);
+    };
+  }, [t["terms.body"]]); 
+
   return (
     <div className="page login">
       <div className="bg" />
 
-      {/* Top Navigation */}
       <nav
         className="navbar"
         style={{
@@ -53,19 +83,17 @@ export default function TermsAndConditions() {
           background: "transparent",
         }}
       >
-        {/* Left: Logo */}
-      <div className="nav-left" style={{ display: "flex", alignItems: "center" }}>
-        <Link to="/" style={{ display: "flex", alignItems: "center" }}>
-          <img
-            src="https://storage.123fakturera.se/public/icons/diamond.png"
-            alt="logo"
-            className="nav-logo"
-            style={{ height: "40px", cursor: "pointer" }}
-          />
-        </Link>
-      </div>
+        <div className="nav-left" style={{ display: "flex", alignItems: "center" }}>
+          <Link to="/" style={{ display: "flex", alignItems: "center" }}>
+            <img
+              src="https://storage.123fakturera.se/public/icons/diamond.png"
+              alt="logo"
+              className="nav-logo"
+              style={{ height: "40px", cursor: "pointer" }}
+            />
+          </Link>
+        </div>
 
-        {/* Hamburger for mobile */}
         <button
           onClick={() => setShowMenu((prev) => !prev)}
           className="hamburger"
@@ -80,7 +108,6 @@ export default function TermsAndConditions() {
           ☰
         </button>
 
-        {/* Nav Links (desktop) */}
         <div
           className="nav-links"
           style={{
@@ -95,7 +122,6 @@ export default function TermsAndConditions() {
           <a href="#">{tr("nav.about", "About us")}</a>
           <a href="#">{tr("nav.contact", "Contact Us")}</a>
 
-          {/* Language dropdown */}
           <div style={{ position: "relative", display: "inline-block" }}>
             <button
               onClick={() => setShowDropdown((prev) => !prev)}
@@ -186,7 +212,6 @@ export default function TermsAndConditions() {
         </div>
       </nav>
 
-      {/* Mobile dropdown menu */}
       {showMenu && (
         <div
           className="mobile-menu"
@@ -212,61 +237,57 @@ export default function TermsAndConditions() {
         </div>
       )}
 
-      {/* Terms and Conditions Card */}
       <div className="card" style={{ maxWidth: "650px", padding: "30px 40px" }}>
         <h1 className="title" style={{ fontSize: "32px", marginBottom: "20px", color: "#333" }}>
           {tr("terms.title", "Terms")}
         </h1>
 
+        <div
+          ref={contentRef}
+          style={{
+            maxHeight: "50vh",
+            overflowY: "auto",
+            padding: 0,
+            marginBottom: "25px",
+            textAlign: "left",
+            lineHeight: "1.7",
+            fontSize: "14px",
+            color: "#333",
+          }}
+          onScroll={checkScrollEnd}
+          dangerouslySetInnerHTML={{ __html: t["terms.body"] }}
+        />
 
-<div
-  style={{
-    maxHeight: "50vh", // responsive height
-    overflowY: "auto",
-    padding: 0,
-    marginBottom: "25px",
-    textAlign: "left",
-    lineHeight: "1.7",
-    fontSize: "14px",
-    color: "#333",
-  }}
-  dangerouslySetInnerHTML={{ __html: t["terms.body"] }}
-/>
-
-
-        {/* Go Back button below terms */}
         <button
-          onClick={handleGoBack}
+          onClick={(e) => {
+            if (!canClose) {
+
+              e.preventDefault();
+              return;
+            }
+            handleGoBack();
+          }}
+          disabled={!canClose}
+          aria-disabled={!canClose}
+          aria-label={canClose ? tr("terms.close", "Close") : tr("terms.read_to_close", "Scroll to the bottom to enable")}
           style={{
             width: "100%",
             padding: "14px",
-            background: "#28a745",
+            background: canClose ? "#28a745" : "#a3d5a8",
             color: "white",
             border: "none",
             borderRadius: "25px",
-            cursor: "pointer",
+            cursor: canClose ? "pointer" : "not-allowed",
             fontSize: "16px",
             fontWeight: "600",
+            transition: "background .18s ease, opacity .18s ease",
+            opacity: canClose ? 1 : 0.9,
           }}
         >
-          {t["terms.close"]}
-
+          {t["terms.close"] || tr("terms.close", "Close")}
         </button>
       </div>
 
-      <footer className="footer">
-        <div className="footer-links">
-          <a href="#">{tr("nav.home", "Home")}</a>
-          <a href="#">{tr("nav.order", "Order")}</a>
-          <a href="#">{tr("nav.contact", "Contact us")}</a>
-        </div>
-        <p>
-          {tr(
-            "footer.copyright",
-            "© Lättfaktura, CRO no. 638537, 2025. All rights reserved."
-          )}
-        </p>
-      </footer>
     </div>
   );
 }
